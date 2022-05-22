@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BC21C1D926517DF2007F06A5 /* WeatherDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC21C1D926517DF2007F06A5 /* NetworkingWithCombine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkingWithCombine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21C1DC26517DF3007F06A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC21C1DE26517DF3007F06A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BC21C1E026517DF3007F06A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,7 +58,7 @@
 		BC21C1D026517DF2007F06A5 = {
 			isa = PBXGroup;
 			children = (
-				BC21C1DB26517DF3007F06A5 /* WeatherDemo */,
+				BC21C1DB26517DF3007F06A5 /* NetworkingWithCombine */,
 				BC21C1DA26517DF2007F06A5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,12 +66,12 @@
 		BC21C1DA26517DF2007F06A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BC21C1D926517DF2007F06A5 /* WeatherDemo.app */,
+				BC21C1D926517DF2007F06A5 /* NetworkingWithCombine.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BC21C1DB26517DF3007F06A5 /* WeatherDemo */ = {
+		BC21C1DB26517DF3007F06A5 /* NetworkingWithCombine */ = {
 			isa = PBXGroup;
 			children = (
 				BCEABB20265A497A000B8A1B /* WebService */,
@@ -84,7 +84,7 @@
 				BC21C1E726517DF7007F06A5 /* LaunchScreen.storyboard */,
 				BC21C1EA26517DF7007F06A5 /* Info.plist */,
 			);
-			path = WeatherDemo;
+			path = NetworkingWithCombine;
 			sourceTree = "<group>";
 		};
 		BC21C1F026517E09007F06A5 /* Model */ = {
@@ -129,9 +129,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BC21C1D826517DF2007F06A5 /* WeatherDemo */ = {
+		BC21C1D826517DF2007F06A5 /* NetworkingWithCombine */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BC21C1ED26517DF7007F06A5 /* Build configuration list for PBXNativeTarget "WeatherDemo" */;
+			buildConfigurationList = BC21C1ED26517DF7007F06A5 /* Build configuration list for PBXNativeTarget "NetworkingWithCombine" */;
 			buildPhases = (
 				BC21C1D526517DF2007F06A5 /* Sources */,
 				BC21C1D626517DF2007F06A5 /* Frameworks */,
@@ -141,9 +141,9 @@
 			);
 			dependencies = (
 			);
-			name = WeatherDemo;
+			name = NetworkingWithCombine;
 			productName = WeatherDemo;
-			productReference = BC21C1D926517DF2007F06A5 /* WeatherDemo.app */;
+			productReference = BC21C1D926517DF2007F06A5 /* NetworkingWithCombine.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -160,7 +160,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BC21C1D426517DF2007F06A5 /* Build configuration list for PBXProject "WeatherDemo" */;
+			buildConfigurationList = BC21C1D426517DF2007F06A5 /* Build configuration list for PBXProject "NetworkingWithCombine" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -173,7 +173,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BC21C1D826517DF2007F06A5 /* WeatherDemo */,
+				BC21C1D826517DF2007F06A5 /* NetworkingWithCombine */,
 			);
 		};
 /* End PBXProject section */
@@ -356,12 +356,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Z7DUYBZ6B;
-				INFOPLIST_FILE = WeatherDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/NetworkingWithCombine/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.milq.WeatherDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milq.NetworkingWithCombine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -375,12 +375,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8Z7DUYBZ6B;
-				INFOPLIST_FILE = WeatherDemo/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/NetworkingWithCombine/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.milq.WeatherDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.milq.NetworkingWithCombine;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -390,7 +390,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BC21C1D426517DF2007F06A5 /* Build configuration list for PBXProject "WeatherDemo" */ = {
+		BC21C1D426517DF2007F06A5 /* Build configuration list for PBXProject "NetworkingWithCombine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC21C1EB26517DF7007F06A5 /* Debug */,
@@ -399,7 +399,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BC21C1ED26517DF7007F06A5 /* Build configuration list for PBXNativeTarget "WeatherDemo" */ = {
+		BC21C1ED26517DF7007F06A5 /* Build configuration list for PBXNativeTarget "NetworkingWithCombine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BC21C1EE26517DF7007F06A5 /* Debug */,
