@@ -7,14 +7,11 @@
 
 import Foundation
 
-
-
-
 struct GenericResponseParser<T: Decodable>: ResponseParserType {
 
     typealias Response = T
     
-    func parse(data: Data) throws -> T?  {
+    func parse(data: Data) throws -> T  {
         try JSONDecoder().decode(Response.self, from: data)
     }
     

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,19 +12,19 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="WeatherDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="NetworkingWithCombine" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iza-1B-xxE">
-                                <rect key="frame" x="184" y="492" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iza-1B-xxE">
+                                <rect key="frame" x="94" y="492" width="226" height="30"/>
+                                <state key="normal" title="Search With Single-Shot pipeline"/>
                                 <connections>
                                     <action selector="searchAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bWN-Et-2Ft"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q1O-e2-wfi">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Continous Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q1O-e2-wfi">
                                 <rect key="frame" x="40" y="436" width="334" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -34,6 +35,7 @@
                         <constraints>
                             <constraint firstItem="Q1O-e2-wfi" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5bc-gR-iKO"/>
                             <constraint firstItem="Iza-1B-xxE" firstAttribute="top" secondItem="Q1O-e2-wfi" secondAttribute="bottom" constant="22" id="9UE-Qw-ift"/>
+                            <constraint firstItem="Iza-1B-xxE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="GK0-bn-RqC"/>
                             <constraint firstItem="Q1O-e2-wfi" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.806763" id="qqL-C4-dEg"/>
                             <constraint firstItem="Q1O-e2-wfi" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="tTg-rA-3OP"/>
                         </constraints>

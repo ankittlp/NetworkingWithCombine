@@ -31,11 +31,11 @@ struct WeatherRequest: RequestConvertable, KeyBasedRequest {
 
 
 struct WeatherResponseParser: ResponseParserType {
-
+   
     typealias Response = Weather
     
-    func parse(data: Data) -> Weather? {
-        try? JSONDecoder().decode(Response.self, from: data)
+    func parse(data: Data) throws -> Weather {
+        try JSONDecoder().decode(Response.self, from: data)
     }
     
 }

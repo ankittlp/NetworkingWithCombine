@@ -38,7 +38,7 @@ extension Request {
 protocol ResponseParserType {
     associatedtype Response
     
-    func parse(data: Data) throws -> Response?
+    func parse(data: Data) throws -> Response
 }
 
 public typealias JSONDictionary = [String : Any]

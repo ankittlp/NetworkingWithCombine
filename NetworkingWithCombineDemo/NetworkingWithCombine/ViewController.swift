@@ -13,13 +13,11 @@ class ViewController: UIViewController, DependencyInjecting {
     var anyCancellable: AnyCancellable?
     var searchCancellable: AnyCancellable?
     var assignCancellable: AnyCancellable?
-    
     var subscribers = Set<AnyCancellable>()
     
     var searchTextPublisher: PassthroughSubject<String,Error>? = PassthroughSubject()
     var searchText: String = "" {
         didSet{
-            
             searchTextPublisher?.send(searchText)
         }
     }
@@ -28,7 +26,6 @@ class ViewController: UIViewController, DependencyInjecting {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         /*anyCancellable = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.placeNameField).compactMap { notification in
             (notification.object as? UITextField)?.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
@@ -50,31 +47,16 @@ class ViewController: UIViewController, DependencyInjecting {
             print("Returned data - \(Thread.isMainThread ? "MainThred" : "Background  Thread")\(object)")
         }*/
         
-        // This was a try for changing request to publisher
-        //let x  = WeatherRequest(query: "").tryMap( { try $0.asURLRequest()})
         
-//        flatMap({ city in
-//                    let request = WeatherRequest(query: city)
-//                return self.context.requestExecutor.executeRequest(request: request).catch { _ in
-//                    Just(Place(id: 0, name: "", coordinate: Coordinate.init(lat: 0, lon: 0), weatherValues: Weather.init(temp: nil, humidity: nil, pressure: nil))).map($0)
-//                }
-//
-//                })
-        
-        //Just(Place(id: 0, name: "", coordinate: Coordinate.init(lat: 0, lon: 0), weatherValues: Weather.init(temp: nil, humidity: nil, pressure: nil)))
-        
-        
-        
+        // Link two publishers to make continous search.
+        // We want to show some actual error to user.
         let textChangePublisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.placeNameField).compactMap { notification in
             (notification.object as? UITextField)?.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         }.debounce(for: .milliseconds(500), scheduler: RunLoop.main).flatMap({ Just($0)}).eraseToAnyPublisher()
-        
-        
-        
         textChangePublisher.assign(to: \.searchText, on: self).store(in: &subscribers)
+        
         searchTextPublisher?.sink(receiveCompletion: {_ in }, receiveValue: { [self] text in
             let request = WeatherRequest(query: text)
-            /*do {*/
                 anyCancellable = container.requestExecutor.executeRequest(request: request).sink(receiveCompletion: { completion in
                     
                     print("Thread == \(Thread.current)")
@@ -87,38 +69,31 @@ class ViewController: UIViewController, DependencyInjecting {
                 }, receiveValue: { weather in
                     print("Data -> \(weather)")
                 })
-            /*} catch  {
-                print("Error ->> \(error)")
-            }*/
         }).store(in: &subscribers)
         
         
         
-        // Single Pipeline - break after completion
+        // Single Pipeline
+        // This an example where single pipeline is created but error is replced with placeholder `Place` object.
+        
         /*
-       NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.placeNameField).compactMap { notification in
-            (notification.object as? UITextField)?.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-       }.debounce(for: .milliseconds(500), scheduler: RunLoop.main).flatMap { text -> Just<WeatherRequest> in
+        NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.placeNameField).compactMap { notification in
+              (notification.object as? UITextField)?.text?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        }.debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+            .flatMap { text -> Just<WeatherRequest> in
            var x = WeatherRequest(query: text)
            x.method = "GET"
-           return Just(x)
-       }.map { request in
-           return self.container.requestExecutor.executeRequest(request: request)
-       }.flatMap({ $0}).sink { completion in
-           
-           print("Thread == \(Thread.current)")
-           switch completion {
-           case .finished:
-               print("receiveCompletion --> \(completion)")
-           case .failure(let error):
-               print("receiveCompletion \(error.localizedDescription)")
-           }
-       } receiveValue: { weather in
-           print("Data -> \(weather)")
-       }.store(in: &subscribers)
+            return Just(x)}
+            .flatMap { city in
+                return self.container.requestExecutor.executeRequest(request: city).catch { _ in
+                    Just(Place(id: 0, name: "", coordinate: Coordinate.init(lat: 0, lon: 0), weatherValues: Weather.init(temp: nil, humidity: nil, pressure: nil))).map({$0})
+                }
+            }.sink { weather in
+                print("Data -> \(weather)")
+            }.store(in: &subscribers)
 
-        */
         
+        */
         
     }
     
@@ -129,8 +104,7 @@ class ViewController: UIViewController, DependencyInjecting {
         
         let request = WeatherRequest(query: text)
         
-        do {
-            anyCancellable = try container.requestExecutor.executeRequest(request: request).sink(receiveCompletion: { completion in
+        anyCancellable = container.requestExecutor.executeRequest(request: request).sink(receiveCompletion: { completion in
                 
                 print("Thread == \(Thread.current)")
                 switch completion {
@@ -142,14 +116,10 @@ class ViewController: UIViewController, DependencyInjecting {
             }, receiveValue: { weather in
                 print("Data -> \(weather)")
             })
-        } catch  {
-            print("Error ->> \(error)")
-        }
-        
-        
-        
     }
     
 
 }
+
+
 

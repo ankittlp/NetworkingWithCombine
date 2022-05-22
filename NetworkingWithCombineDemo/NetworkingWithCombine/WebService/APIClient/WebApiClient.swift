@@ -21,18 +21,20 @@ class WebApiClient: RequestExecutor {
     }
     
     func executeRequest<R>(request: R)  -> AnyPublisher<R.Response, Error> where R : RequestConvertable {
-        
-        // This is to remove force try
-        guard let requestt = try? request.asURLRequest()  else {
+        // 1
+        // Using Fail publisher this will help us to remove the `try! request.asURLRequest()` and make a early exit with guard in place.
+        guard let requestt = try? request.asURLRequest() else {
             return  Fail(error: APIError.badRequest()).eraseToAnyPublisher()
         }
+        // 2
+        // Earlier i was using Current value subject that act as an publisher which emit void value and can fail with error.
         /*
          CurrentValueSubject<Void,Error>(()).tryMap { () in
              throw  APIError.badRequest()
          }
          */
-        
-        return session.dataTaskPublisher(for: /*try! request.asURLRequest()*/ requestt).print().tryMap({ [self] (data: Data, response: URLResponse) -> Data in
+        // 3
+        return session.dataTaskPublisher(for: /*try! request.asURLRequest()*/ requestt).tryMap({ [self] (data: Data, response: URLResponse) -> Data in
             if let httpResponse = response as? HTTPURLResponse {
                 if request.reponseValidRange.contains(httpResponse.statusCode) {
                     return data
@@ -43,30 +45,23 @@ class WebApiClient: RequestExecutor {
                 throw APIError.invalidResponse()
             }
         }).tryMap { returnData in
+            
             if let parser = request.parser {
                 
                 do {
-                    if let object =  try parser.parse(data: returnData) {
-                        return object
-                    } else {
-                        throw APIError.parseError()
-                    }
+                    return try parser.parse(data: returnData)
                 } catch {
                     throw APIError.parseError(error)
                 }
-                /*
-                if  let object =  try parser.parse(data: returnData) {
-                    return object
-                }else {
-                    throw APIError.parseError()
-                }*/
-            }else {
-                if let Object = try? JSONDecoder().decode(R.Response.self, from: returnData) {
-                    return Object
-                }else {
-                    throw APIError.parseError()
+    
+            } else {
+                do {
+                    return try JSONDecoder().decode(R.Response.self, from: returnData)
+                } catch {
+                    throw APIError.parseError(error)
                 }
             }
+            
         }.mapError({ error in
             if let error = error as? APIError {
                 return error
@@ -74,16 +69,6 @@ class WebApiClient: RequestExecutor {
                 return APIError.unknown(error)  
             }
         }).receive(on: RunLoop.main).eraseToAnyPublisher()
-        /*.map({ data in
-            if let parser = request.parser {
-                return parser.parse(data: data)
-            }else {
-                return JSONDecoder().decode(R.Response.self, from: data)
-            }
-        }).eraseToAnyPublisher()*/
-        //.map({ (request.parser!.parse(data: $0))}).receive(on: RunLoop.main).eraseToAnyPublisher()
-        //.decode(type: R.Response.self, decoder: JSONDecoder()).eraseToAnyPublisher()
-            //.receive(on: RunLoop.main).eraseToAnyPublisher()
     }
     
     private
